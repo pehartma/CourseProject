@@ -17,4 +17,7 @@ https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html
 Do your development in background.js, then run:
 "browserify background.js -o background-bundle.js"
 
-In background.js, 
+In background.js, stopwordValue is what is set by the slider. The current value range is from 0 to 10, initial value 5.
+The value can be adjusted under button.css.
+
+I've put some notes in background.js, which may help you.
