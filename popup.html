@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="width=300px">
     <link rel="stylesheet" href="button.css">
-    <title>Title</title>
+    <title>Intelligent Browser Options</title>
 </head>
 <body>
-    <button id="changeColor"></button>
+    <div id="popupBody"></div>
+    <h3>Stop Word Limits</h3>
+    <div class="slidecontainer">
+        <label for="myRange"></label><input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+        <p>Value: <span id="k_value"></span></p>
+    </div>
+    <h3>Search Engine</h3>
+    <div class="slidecontainer">
+        <label for="myEngine"></label><input type="range" min="0" max="1" value="0" class="slider" id="myEngine">
+        <p>Search Engine: <span id="engine_value"></span></p>
+    </div>
     <script src="popup.js"></script>
+
 </body>
 </html>
