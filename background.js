@@ -23,16 +23,18 @@ function loadPageTokens() {
     //The return value should be the Bag of Words that need to be replaced in the body.
     const winkNLP = require('wink-nlp');
     const model = require('wink-eng-lite-web-model');
+    const utils = require('wink-nlp-utils');
     const nlp = winkNLP(model);
     const its = nlp.its;
     const as = nlp.as;
 
     const doc = nlp.readDoc(document.body.innerHTML)
+    const bow = utils.bagOfWords(doc);
     //console.log(doc.tokens().out())
-    return doc;
+    return bow;
 }
 
-function replaceTextInNode (parentNode){
+function replaceTextInNode (parentNode, tokens){
     //This is the code I used for testing the word replacement. I knew the page I was on had the word "shade" in it
     //And I replaced it with "shade-markup", so this code works. Basically, This code needs to be changed so that
     //for every bag of words token given by loadPageTokens, the "word" needs to be replaced with
@@ -49,7 +51,8 @@ function replaceTextInNode (parentNode){
     //     }
     // }
 
-    var regex = /shade/g; // TODO: Create regex that matches all the top K ranked tokens
+    var regex = new RegExp('\\b(' + tokens.join('|') + '\\b', 'ig');
+
     matchText(parentNode, regex, function(node, match, offset) {
         var a = document.createElement("a");
         var preprocessQuery = function(queryText) {
@@ -110,8 +113,9 @@ function matchText(node, regex, callback, excludeElements) {
 };
 
 
-loadPageTokens()
+var bagOfWords = loadPageTokens();
+var tokens = bagOfWords.keys().slice(0, stopwordValue);
 
-replaceTextInNode(document.body);
+replaceTextInNode(document.body, tokens);
 
 
