@@ -28,7 +28,7 @@ function loadPageTokens() {
     const its = nlp.its;
     const as = nlp.as;
 
-    const doc = nlp.readDoc(document.body.innerHTML)
+    const doc = nlp.readDoc(document.body.innerHTML);
     const bow = utils.bagOfWords(doc);
     //console.log(doc.tokens().out())
     return bow;
