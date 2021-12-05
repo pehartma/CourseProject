@@ -1,5 +1,7 @@
 // background.js
 
+const composeCorpus = require('wink-nlp-utils/src/string-compose-corpus');
+
 //stopwordValue is what is set by the slider. The current value range is from 0 to 10, initial value 5.
 //The value can be adjusted under button.css
 let stopwordValue = 5
@@ -28,9 +30,18 @@ function loadPageTokens() {
     const its = nlp.its;
     const as = nlp.as;
 
-    const doc = nlp.readDoc(document.body.innerHTML);
-    const bow = utils.bagOfWords(doc);
-    //console.log(doc.tokens().out())
+    var text = (document.body.textContent);
+    text = text.replace(/<script.+\/script>/g, ' '); // Remove all scripts
+    text = text.replace(/<style.+\/style>/g, ' '); // Remove all styles
+    text = utils.string.removeHTMLTags(text);
+    text = utils.string.removePunctuations(text);
+    text = utils.string.removeExtraSpaces(text);
+    text = utils.string.removeSplChars(text);
+    text = utils.string.lowerCase(text);
+    // console.log(text);
+    var doc = nlp.readDoc(text);
+    var tok = utils.tokens.removeWords(doc.tokens().out());
+    const bow = utils.tokens.bagOfWords(tok);
     return bow;
 }
 
@@ -51,7 +62,7 @@ function replaceTextInNode (parentNode, tokens){
     //     }
     // }
 
-    var regex = new RegExp('\\b(' + tokens.join('|') + '\\b', 'ig');
+    var regex = new RegExp('\\b(' + tokens.join('|') + ')\\b', 'ig');
 
     matchText(parentNode, regex, function(node, match, offset) {
         var a = document.createElement("a");
@@ -114,7 +125,16 @@ function matchText(node, regex, callback, excludeElements) {
 
 
 var bagOfWords = loadPageTokens();
-var tokens = bagOfWords.keys().slice(0, stopwordValue);
+var sortedBOW = [];
+for (var word in bagOfWords) {
+    sortedBOW.push([word, bagOfWords[word]]);
+}
+sortedBOW.sort((a, b) => b[1] - a[1]);
+var tokens = [];
+for (var wc in sortedBOW.slice(0, stopwordValue)) {
+    tokens.push(sortedBOW[wc][0]);
+}
+// console.log(tokens);
 
 replaceTextInNode(document.body, tokens);
 
