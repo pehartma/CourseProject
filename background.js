@@ -4,10 +4,19 @@ const composeCorpus = require('wink-nlp-utils/src/string-compose-corpus');
 
 //stopwordValue is what is set by the slider. The current value range is from 0 to 10, initial value 5.
 //The value can be adjusted under button.css
-let stopwordValue = 5
+let stopwordValue = getCookieValue('rabbithole_words', 5);
 //engineLocalValue can be 0 (for Google) or 1 (for wikipedia). In replaceTextInNode, this value should be used to
 //figure out which href to replace the text with.
-let engineLocalValue = 0
+let engineLocalValue = getCookieValue('rabbithole_engine', 0);
+
+function getCookieValue(name, default_value) {
+    let re = new RegExp(name + '=(\\d+)\\b');
+    let match = document.cookie.match(re);
+    if (match) {
+        return parseInt(match[1]);
+    }
+    return default_value;
+}
 
 chrome.runtime.onMessage.addListener(
     function (message, sender, sendResponse) {
@@ -17,7 +26,9 @@ chrome.runtime.onMessage.addListener(
         sendResponse("message");
         console.log("stopwordValue = "+ stopwordValue);
         console.log("engineLocalValue = "+ engineLocalValue);
-
+        document.cookie = "rabbithole_engine=" + engineLocalValue;
+        document.cookie = "rabbithole_words=" + stopwordValue;
+        console.log(document.cookie);
     }
 )
 function loadPageTokens() {
@@ -138,4 +149,4 @@ for (var wc in sortedBOW.slice(0, stopwordValue)) {
 
 replaceTextInNode(document.body, tokens);
 
-
+console.log(document.cookie);
