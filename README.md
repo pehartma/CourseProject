@@ -6,7 +6,7 @@
 
 ### Overview
 
-Rabbit Hole is a Chrome Extension whose goal is to improve Internet research by intelligently identifying key words in web pages and converting those words to clickable links to search pages. To do this, Rabbit Hole uses a light-weight English language model run entirely client-side using [WinkJS](https://winkjs.org). After scraping the page for text content, the language model is used to preprocess and tokenize the contents, then the top tokens (by frequency) are chosen to replaced into links.
+Rabbit Hole is a Chrome Extension whose goal is to improve Internet research by intelligently identifying key words in web pages and converting those words to clickable links to search pages. To do this, Rabbit Hole uses a [light-weight English language model](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html) run entirely client-side using [WinkJS](https://winkjs.org). After scraping the page for text content, the language model is used to preprocess and tokenize the contents, then the top tokens (by frequency) are chosen to replaced into links.
 
 The extension is written entirely using JavaScript with HTML/CSS used to style the popup window for the extension. [NodeJS](https://nodejs.org/en/) and [Browserify](https://browserify.org) are used bundle the dependencies and convert them to a format compatible with Chrome browsers for client-side use.
 
