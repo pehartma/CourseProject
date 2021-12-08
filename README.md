@@ -1,23 +1,74 @@
-# cs410_group_project
+# Rabbit Hole
 
-To load this extension, use the following directions:
-1. Open the Extension Management page by navigating to chrome://extensions.
-	1. Alternatively, open this page by clicking on the Extensions menu button and selecting Manage Extensions at the bottom of the menu.
-	1. Alternatively, open this page by clicking on the Chrome menu, hovering over More Tools then selecting Extensions
-1. Enable Developer Mode by clicking the toggle switch next to Developer mode.
-1. Click the Load unpacked button and select the extension directory.
-1. The extension in the selected directory will load.
+## CS410 Winter 2021 Course Project
 
+> A Chrome Extension that speeds up research with autodetected key words.
 
-Development for this extension:
+### Overview
 
-This extension uses WinkNLP which uses NodeJS. In order to properly develop this extension, you will need to follow the directions here:
-https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html
+Rabbit Hole is a Chrome Extension whose goal is to improve Internet research by intelligently identifying key words in web pages and converting those words to clickable links to search pages. To do this, Rabbit Hole uses a light-weight English language model run entirely client-side using [WinkJS](https://winkjs.org). After scraping the page for text content, the language model is used to preprocess and tokenize the contents, then the top tokens (by frequency) are chosen to replaced into links.
 
-Do your development in background.js, then run:
-"browserify background.js -o background-bundle.js"
+The extension is written entirely using JavaScript with HTML/CSS used to style the popup window for the extension. [NodeJS](https://nodejs.org/en/) and [Browserify](https://browserify.org) are used bundle the dependencies and convert them to a format compatible with Chrome browsers for client-side use.
 
-In background.js, stopwordValue is what is set by the slider. The current value range is from 0 to 10, initial value 5.
-The value can be adjusted under button.css.
+---
 
-I've put some notes in background.js, which may help you.
+### Installation
+
+To install the Rabbit Hole extension you will need a Chromium-based browser (Chrome, Vivalidi, etc.) that supports Chrome Extensions.
+
+**Step 1**: Clone this GitHub repository.
+
+```bash
+git clone https://github.com/pehartma/cs410_group_project.git
+```
+
+**Step 2**: In your Chromium-based the Extensions menu. If you are using Chrome, make sure you have enabled _Developer Mode_ by clicking the toggle switch on the top right, then select the _LOAD UNPACKED_ button on the top menu and select the directory in which you cloned this repository.
+
+![Chrome Extensions Menu](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/iYdLKFsJ1KSVGLhbLRvS.png?auto=format&w=650)
+
+And you're done! The Rabbit Hole extension will now be installed on your browser.
+
+---
+
+### Usage
+
+ Once the Rabbit Hole extension has been enabled in your browser, navigate to a webpage. Once there, click on the extension popup in your browser's taskbar.
+
+ ![Rabbit Hole Extension Popup Window](./images/Extension_Popup.png)
+
+ From the popup, you can adjust the sliders to change the number of maximum number of key words that will be selected and the search engine for links.
+
+ **In order for your changes to be reflected you'll need to refresh the page.**
+
+The extension will automatically try to detect key words on the webpage and will turn instances of these words into clickable links for you to navigate with.
+
+![Hovering Over a Link](./images/Hovering_Over_Link.png)
+
+When you click on the link you'll be taken to the search page for the key word.
+
+![Google Search Page](./images/Google_Search.png)
+
+**Note: You will have to set your slider settings per webpage at the moment.**
+
+---
+
+### Team Contributions
+
+#### Peter Hartman (Leader)
+
+* General program structure
+* Popup UI (HTML & CSS)
+* Diplay module
+* Execute module
+* Module interaction
+
+#### Steven Hernandez
+
+* Text extraction
+* Text preprocessing
+* Language model integration
+* Text replacement
+* Persistent state for controls
+* User testing
+
+---
