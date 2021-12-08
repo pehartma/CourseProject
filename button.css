@@ -40,18 +40,25 @@ button.current {
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
+    background: #FFA833; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
+    background: #FFA833; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 
 body {
     overflow-x: hidden;
     width: 240px;
+}
+
+
+a.two:link {
+    color: #FFA833;
+    background-color: transparent;
+    text-decoration: none;
 }

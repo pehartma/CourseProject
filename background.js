@@ -24,13 +24,12 @@ chrome.runtime.onMessage.addListener(
         stopwordValue = obj.stopword;
         engineLocalValue = obj.enginevalue;
         sendResponse("message");
-        console.log("stopwordValue = "+ stopwordValue);
-        console.log("engineLocalValue = "+ engineLocalValue);
         document.cookie = "rabbithole_engine=" + engineLocalValue;
         document.cookie = "rabbithole_words=" + stopwordValue;
-        console.log(document.cookie);
+        //console.log(document.cookie);
     }
 )
+
 function loadPageTokens() {
     //This is where all of the language processing happens
     //The return value should be the Bag of Words that need to be replaced in the body.
@@ -49,7 +48,6 @@ function loadPageTokens() {
     text = utils.string.removeExtraSpaces(text);
     text = utils.string.removeSplChars(text);
     text = utils.string.lowerCase(text);
-    // console.log(text);
     var doc = nlp.readDoc(text);
     var tok = utils.tokens.removeWords(doc.tokens().out());
     const bow = utils.tokens.bagOfWords(tok);
@@ -77,6 +75,8 @@ function replaceTextInNode (parentNode, tokens){
 
     matchText(parentNode, regex, function(node, match, offset) {
         var a = document.createElement("a");
+        a.target = "_blank";
+        a.style = "color:#FFA833;";
         var preprocessQuery = function(queryText) {
             queryText = queryText.
                 trim().
@@ -138,15 +138,18 @@ function matchText(node, regex, callback, excludeElements) {
 var bagOfWords = loadPageTokens();
 var sortedBOW = [];
 for (var word in bagOfWords) {
-    sortedBOW.push([word, bagOfWords[word]]);
+    if (bagOfWords[word] >= stopwordValue){
+        sortedBOW.push([word, bagOfWords[word]]);
+    }
 }
+
 sortedBOW.sort((a, b) => b[1] - a[1]);
 var tokens = [];
-for (var wc in sortedBOW.slice(0, stopwordValue)) {
-    tokens.push(sortedBOW[wc][0]);
+//for (var newToken in sortedBOW) {
+for (let i = 0; i < sortedBOW.length; i++){
+    tokens.push(sortedBOW[i][0]);
 }
-// console.log(tokens);
 
 replaceTextInNode(document.body, tokens);
 
-console.log(document.cookie);
+//console.log(document.cookie);
