@@ -62,6 +62,8 @@ When you click on the link you'll be taken to the search page for the key word.
 
 ### Demonstration
 
+[Video Demonstration](https://mediaspace.illinois.edu/media/t/1_0zp2e4yw)
+
 ---
 
 ### Team Contributions
