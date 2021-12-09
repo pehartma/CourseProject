@@ -1,6 +1,6 @@
 # Rabbit Hole
 
-## CS410 Winter 2021 Course Project
+## CS410 Fall 2021 Course Project
 
 > A Chrome Extension that speeds up research with autodetected key words.
 
