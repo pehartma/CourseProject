@@ -15,6 +15,18 @@ stopwordslider.oninput = function() {
     message = JSON.stringify({stopword: stopwordslider.value, enginevalue: engineSelection.value})
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, message, function(confirmed) {});
+
+        // can hang (unresponsive) consecutive fast reload
+        // chrome.tabs.reload(tabs[0].id);
+        // sleep(2000);
+        
+
+    
+    //ignore this
+    // attempt to reload on change
+    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    //     chrome.tabs.reload(tabs[0].id);
+    //     sleep(20);
     });
 }
 
