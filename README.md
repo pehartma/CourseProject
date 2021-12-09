@@ -4,6 +4,14 @@
 
 > A Chrome Extension that speeds up research with autodetected key words.
 
+### Documentation Contents
+
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Demonstration](#demonstration)
+5. [Team Contributions](#team-contributions)
+
 ### Overview
 
 Rabbit Hole is a Chrome Extension whose goal is to improve Internet research by intelligently identifying key words in web pages and converting those words to clickable links to search pages. To do this, Rabbit Hole uses a [light-weight English language model](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html) run entirely client-side using [WinkNLP](https://winkjs.org). After scraping the page for text content, the language model is used to preprocess and tokenize the contents, then the top tokens (by frequency) are chosen to replaced into links.
@@ -19,7 +27,7 @@ To install the Rabbit Hole extension you will need a Chromium-based browser (Chr
 **Step 1**: Clone this GitHub repository.
 
 ```bash
-git clone https://github.com/pehartma/cs410_group_project.git
+git clone https://github.com/pehartma/CourseProject.git
 ```
 
 **Step 2**: In your Chromium-based the Extensions menu. If you are using Chrome, make sure you have enabled _Developer Mode_ by clicking the toggle switch on the top right, then select the _LOAD UNPACKED_ button on the top menu and select the directory in which you cloned this repository.
@@ -36,9 +44,9 @@ And you're done! The Rabbit Hole extension will now be installed on your browser
 
  ![Rabbit Hole Extension Popup Window](./images/Extension_Popup.png)
 
- From the popup, you can adjust the sliders to change the number of maximum number of key words that will be selected and the search engine for links.
+ From the popup, you can adjust the sliders to adjust the key word sensitivity (the minimum frequency for each key word) and the search engine for links.
 
- **In order for your changes to be reflected you'll need to refresh the page.**
+**Note: In order for your changes to be reflected, you'll need to refresh the page.**
 
 The extension will automatically try to detect key words on the webpage and will turn instances of these words into clickable links for you to navigate with.
 
@@ -49,6 +57,10 @@ When you click on the link you'll be taken to the search page for the key word.
 ![Google Search Page](./images/Google_Search.png)
 
 **Note: You will have to set your slider settings per webpage at the moment.**
+
+---
+
+### Demonstration
 
 ---
 
@@ -70,9 +82,11 @@ When you click on the link you'll be taken to the search page for the key word.
 * Text replacement
 * Persistent state for controls
 * User testing
+* Project Documentation & Demo
 
 #### SangJin Hyun
 
 * User Testing
 * Popup (display)
+
 ---
